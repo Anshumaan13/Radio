@@ -2,7 +2,7 @@ import httpx
 import logging
 from typing import List, Dict, Optional
 from cachetools import TTLCache
-from ..models import Country, RadioStation, RadioBrowserStation, RadioBrowserCountry
+from models import Country, RadioStation, RadioBrowserStation, RadioBrowserCountry
 
 logger = logging.getLogger(__name__)
 

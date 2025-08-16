@@ -294,9 +294,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "All Global Radio API backend endpoints tested successfully"
+    - "All Global Radio frontend components tested successfully"
+    - "Complete user journey from country selection to radio playback verified"
   stuck_tasks: []
-  test_all: false
+  test_all: true
   test_priority: "high_first"
 
 agent_communication:

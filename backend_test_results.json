@@ -1,0 +1,198 @@
+{
+  "summary": {
+    "total_tests": 11,
+    "passed": 11,
+    "failed": 0,
+    "success_rate": 100.0,
+    "failed_tests": []
+  },
+  "detailed_results": [
+    {
+      "test": "Basic Connectivity - GET /api/",
+      "success": true,
+      "details": "API responded with welcome message: Global Radio API - Ready to stream the world!",
+      "timestamp": "2025-08-16T10:28:38.369158",
+      "response_data": {
+        "message": "Global Radio API - Ready to stream the world!"
+      }
+    },
+    {
+      "test": "Countries Endpoint - Structure",
+      "success": true,
+      "details": "Found 50 countries with correct structure. Major countries found: ['US', 'GB', 'DE', 'FR', 'CA']",
+      "timestamp": "2025-08-16T10:28:38.781520",
+      "response_data": {
+        "total_countries": 50,
+        "sample": [
+          {
+            "code": "US",
+            "name": "The United States Of America",
+            "flag": "\ud83c\uddfa\ud83c\uddf8",
+            "station_count": 6955
+          },
+          {
+            "code": "DE",
+            "name": "Germany",
+            "flag": "\ud83c\udde9\ud83c\uddea",
+            "station_count": 5501
+          },
+          {
+            "code": "RU",
+            "name": "The Russian Federation",
+            "flag": "\ud83c\uddf7\ud83c\uddfa",
+            "station_count": 3222
+          }
+        ]
+      }
+    },
+    {
+      "test": "Countries Endpoint - US Data",
+      "success": true,
+      "details": "US: The United States Of America, Flag: \ud83c\uddfa\ud83c\uddf8, Stations: 6955",
+      "timestamp": "2025-08-16T10:28:38.781573",
+      "response_data": {
+        "code": "US",
+        "name": "The United States Of America",
+        "flag": "\ud83c\uddfa\ud83c\uddf8",
+        "station_count": 6955
+      }
+    },
+    {
+      "test": "Stations Endpoint - US Structure",
+      "success": true,
+      "details": "Found 50 stations for United States with correct structure",
+      "timestamp": "2025-08-16T10:28:39.047116",
+      "response_data": {
+        "country": "US",
+        "station_count": 50,
+        "sample": {
+          "id": "d1a54d2e-623e-4970-ab11-35f7b56c5ec3",
+          "name": "Classic Vinyl HD",
+          "frequency": "101.4 FM",
+          "genre": "Jazz",
+          "url": "https://icecast.walmradio.com:8443/classic",
+          "listeners": "10K",
+          "description": "1930, 1940, 1950 from The United States Of America",
+          "favicon": "https://icecast.walmradio.com:8443/classic.jpg",
+          "homepage": "https://walmradio.com/classic",
+          "country": "The United States Of America",
+          "countrycode": "US",
+          "language": "english",
+          "bitrate": 320,
+          "codec": "MP3",
+          "votes": 206769,
+          "clickcount": 9507,
+          "lastcheckok": 1
+        }
+      }
+    },
+    {
+      "test": "Stations Endpoint - GB Structure",
+      "success": true,
+      "details": "Found 50 stations for United Kingdom with correct structure",
+      "timestamp": "2025-08-16T10:28:39.212091",
+      "response_data": {
+        "country": "GB",
+        "station_count": 50,
+        "sample": {
+          "id": "98adecf7-2683-4408-9be7-02d3f9098eb8",
+          "name": "BBC World Service",
+          "frequency": "93.1 FM",
+          "genre": "News/Talk",
+          "url": "http://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+          "listeners": "7K",
+          "description": "News, Talk from The United Kingdom Of Great Britain And Northern Ireland",
+          "favicon": "http://cdn-profiles.tunein.com/s24948/images/logoq.jpg?t=1",
+          "homepage": "https://www.bbc.co.uk/programmes/w172xzjgf6lxp7y",
+          "country": "The United Kingdom Of Great Britain And Northern Ireland",
+          "countrycode": "GB",
+          "language": "english",
+          "bitrate": 56,
+          "codec": "MP3",
+          "votes": 133550,
+          "clickcount": 6763,
+          "lastcheckok": 1
+        }
+      }
+    },
+    {
+      "test": "Stations Endpoint - DE Structure",
+      "success": true,
+      "details": "Found 50 stations for Germany with correct structure",
+      "timestamp": "2025-08-16T10:28:39.368269",
+      "response_data": {
+        "country": "DE",
+        "station_count": 50,
+        "sample": {
+          "id": "78012206-1aa1-11e9-a80b-52543be04c81",
+          "name": "MANGORADIO",
+          "frequency": "97.5 FM",
+          "genre": "Variety",
+          "url": "https://mangoradio.stream.laut.fm/mangoradio",
+          "listeners": "7K",
+          "description": "Music, Variety from Germany",
+          "favicon": "https://mangoradio.de/wp-content/uploads/cropped-Logo-192x192.webp",
+          "homepage": "https://mangoradio.de/",
+          "country": "Germany",
+          "countrycode": "DE",
+          "language": "german",
+          "bitrate": 128,
+          "codec": "MP3",
+          "votes": 750836,
+          "clickcount": 6937,
+          "lastcheckok": 1
+        }
+      }
+    },
+    {
+      "test": "Stations Limit Parameter",
+      "success": true,
+      "details": "Limit parameter working: requested 10, got 10 stations",
+      "timestamp": "2025-08-16T10:28:39.518217",
+      "response_data": {
+        "requested_limit": 10,
+        "actual_count": 10
+      }
+    },
+    {
+      "test": "Invalid Country Code",
+      "success": true,
+      "details": "Correctly returned HTTP 400 for invalid country code",
+      "timestamp": "2025-08-16T10:28:39.530804",
+      "response_data": {
+        "status_code": 400
+      }
+    },
+    {
+      "test": "Station Validation",
+      "success": true,
+      "details": "Validation endpoint working: {'valid': True, 'status': 'working', 'last_checked': '2025-08-16T10:28:39.535486'}",
+      "timestamp": "2025-08-16T10:28:39.538920",
+      "response_data": {
+        "valid": true,
+        "status": "working",
+        "last_checked": "2025-08-16T10:28:39.535486"
+      }
+    },
+    {
+      "test": "Error Handling - Single Char Country",
+      "success": true,
+      "details": "Correctly rejected single character country code",
+      "timestamp": "2025-08-16T10:28:39.546611",
+      "response_data": {
+        "status_code": 400
+      }
+    },
+    {
+      "test": "Error Handling - Three Char Country",
+      "success": true,
+      "details": "Correctly rejected three character country code",
+      "timestamp": "2025-08-16T10:28:39.595497",
+      "response_data": {
+        "status_code": 400
+      }
+    }
+  ],
+  "test_timestamp": "2025-08-16T10:28:39.595722",
+  "api_base_url": "https://worldwave-radio-42.preview.emergentagent.com/api"
+}

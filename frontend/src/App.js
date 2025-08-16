@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import './App.css';
-import { mockCountries, mockRadioStations } from './mock';
 import CountrySelector from './components/CountrySelector';
 import StationList from './components/StationList';
 import RadioPlayer from './components/RadioPlayer';
-import { Globe, Radio, Waves } from 'lucide-react';
+import LoadingSpinner from './components/LoadingSpinner';
+import { useCountries, useStations } from './hooks/useRadioData';
+import { Globe, Radio, Waves, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
+import { Alert, AlertDescription } from './components/ui/alert';
 
 function App() {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedStation, setSelectedStation] = useState(null);
   const [open, setOpen] = useState(false);
+
+  // Use custom hooks for data fetching
+  const { countries, loading: countriesLoading, error: countriesError } = useCountries();
+  const { stations, loading: stationsLoading, error: stationsError } = useStations(selectedCountry?.code);
 
   const handleCountryChange = (country) => {
     setSelectedCountry(country);
@@ -21,7 +27,14 @@ function App() {
     setSelectedStation(station);
   };
 
-  const currentStations = selectedCountry ? mockRadioStations[selectedCountry.code] || [] : [];
+  const renderError = (error, title) => (
+    <Alert className="bg-red-500/10 border-red-500/20">
+      <AlertCircle className="h-4 w-4 text-red-400" />
+      <AlertDescription className="text-red-200">
+        <strong>{title}:</strong> {error}
+      </AlertDescription>
+    </Alert>
+  );
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black">
@@ -70,13 +83,19 @@ function App() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CountrySelector
-                    countries={mockCountries}
-                    selectedCountry={selectedCountry}
-                    onCountryChange={handleCountryChange}
-                    open={open}
-                    setOpen={setOpen}
-                  />
+                  {countriesError ? (
+                    renderError(countriesError, "Failed to load countries")
+                  ) : countriesLoading ? (
+                    <LoadingSpinner text="Loading countries..." />
+                  ) : (
+                    <CountrySelector
+                      countries={countries}
+                      selectedCountry={selectedCountry}
+                      onCountryChange={handleCountryChange}
+                      open={open}
+                      setOpen={setOpen}
+                    />
+                  )}
                 </CardContent>
               </Card>
 
@@ -98,11 +117,21 @@ function App() {
                 </CardHeader>
                 <CardContent>
                   {selectedCountry ? (
-                    <StationList
-                      stations={currentStations}
-                      onStationSelect={handleStationSelect}
-                      selectedStation={selectedStation}
-                    />
+                    <>
+                      {stationsError ? (
+                        renderError(stationsError, "Failed to load radio stations")
+                      ) : stationsLoading ? (
+                        <div className="py-12">
+                          <LoadingSpinner size="large" text="Loading radio stations..." />
+                        </div>
+                      ) : (
+                        <StationList
+                          stations={stations}
+                          onStationSelect={handleStationSelect}
+                          selectedStation={selectedStation}
+                        />
+                      )}
+                    </>
                   ) : (
                     <div className="text-center py-12">
                       <Globe className="h-16 w-16 mx-auto mb-4 text-white/30" />

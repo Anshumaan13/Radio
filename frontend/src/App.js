@@ -24,7 +24,7 @@ function App() {
   const currentStations = selectedCountry ? mockRadioStations[selectedCountry.code] || [] : [];
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen relative overflow-hidden bg-black">
       {/* Rotating Earth Background */}
       <div className="absolute inset-0 z-0">
         <div className="earth-container">

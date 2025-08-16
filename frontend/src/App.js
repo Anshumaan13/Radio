@@ -34,7 +34,7 @@ function App() {
             className="earth-image"
           />
         </div>
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
       {/* Content */}

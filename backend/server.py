@@ -10,8 +10,8 @@ from typing import List
 import uuid
 from datetime import datetime
 
-from .models import Country, RadioStation
-from .services.radio_service import radio_service
+from models import Country, RadioStation
+from services.radio_service import radio_service
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
